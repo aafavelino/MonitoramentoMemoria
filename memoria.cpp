@@ -57,7 +57,7 @@ void informacoes_processo(std::vector<std::string> pastas){
     std::string line, token,s;
     std::ofstream info;
 
-    info.open("info_process.txt");
+    info.open("info_process.txt",std::ofstream::out | std::ofstream::trunc);
 
     for (int i = 0; i < pastas.size();i++){
     	const char *aux;
@@ -326,59 +326,74 @@ int main(int argc, char const *argv[])
         exit (1);
     }
 
-    while(true){
+    			cin >> opcao;
 
-	    cin >> opcao;
-
-		vetor.clear();
+			   
 
 
 
-		if (vetor.empty()){
+			    //cout << "";
 
-		    if(strcmp(opcao.c_str(), "top") == 0){
-
-
-			    listaArquivos (argv[1], pastas);
-
-
-			    informacoes_processo(pastas);
-
-			    cout<< "INFORMAÇÕES DA MEMÓRIA TOTAL "<< endl;
-			    informacoes_total();
-			    ler_total();
-			    ler_processo(pastas,vetor);
-
-			    ordenando(vetor);
-
-			    cout<< "INFORMAÇÕES DA MEMÓRIA POR PROCESSO "<< endl;
-
-			    cout << "Name                            PID               Major_faults      Minor_faults       Size(kb)       Swap"<<endl;
-			  	cout <<"-----------------------------------------------------------------------------------------------------------"<<endl;
-
-
-			    print(vetor);
+			    vetor.clear();
+			    remove("info_process.txt");
 
 			    
-			    //std::this_thread::sleep_for (std::chrono::milliseconds(100));
+			    //cout << "";
 
-		    }else if(strcmp(opcao.c_str(), "rm") == 0)
-		    	remove("info_process.txt");
+			if (opcao == "top"){
 
-		    else{
+				 while(true){
 
-		    	cin >> qtd;
-		    	listaArquivos (argv[1], pastas);
+						cout << "";
 
+						vetor.clear();
+			   		 	remove("info_process.txt");
+
+						listaArquivos (argv[1], pastas);
+
+						informacoes_processo(pastas);
+
+
+					    cout<< "INFORMAÇÕES DA MEMÓRIA TOTAL "<< endl;
+					    informacoes_total();
+					    ler_total();
+					    ler_processo(pastas,vetor);
+					    //informacoes_processo(pastas);
+
+					    ordenando(vetor);
+
+					    cout<< "INFORMAÇÕES DA MEMÓRIA POR PROCESSO "<< endl;
+
+					    cout << "Name                            PID               Major_faults      Minor_faults       Size(kb)       Swap"<<endl;
+					  	cout <<"-----------------------------------------------------------------------------------------------------------"<<endl;
+
+					  	pastas.clear();
+					    print(vetor);
+
+
+					    std::this_thread::sleep_for (std::chrono::milliseconds(10000000));
+
+				}
+
+			}else{   
+			   
+				listaArquivos (argv[1], pastas);
 
 			    informacoes_processo(pastas);
 
-			    cout<< "INFORMAÇÕES DA MEMÓRIA TOTAL "<< endl;
-			    informacoes_total();
-			    ler_total();
-			    ler_processo(pastas,vetor);
+			    cout << "";
 
-			    ordenando(vetor);
+
+		    	cin >> qtd;
+
+			    cout<< "INFORMAÇÕES DA MEMÓRIA TOTAL "<< endl;
+
+
+			     informacoes_total();
+			     ler_total();
+			     ler_processo(pastas,vetor);
+
+			     ordenando(vetor);
 
 			    cout<< "INFORMAÇÕES DA MEMÓRIA POR PROCESSO "<< endl;
 
@@ -388,21 +403,12 @@ int main(int argc, char const *argv[])
 
 			    printN(vetor,qtd);
 
+			    //std::this_thread::sleep_for (std::chrono::milliseconds(1000000000000));
 			    
+			}
 
-
-			    //std::this_thread::sleep_for (std::chrono::milliseconds(100));
-		    }
-
-	}
-
-			//remove("info_process.txt");
-
-
-
-	}
-
-	    
+		    
+  
 
 	return EXIT_SUCCESS;
 }
