@@ -1,4 +1,4 @@
-# Monitoramento-De-Memória
+# Monitoramento de Memória
 
 O trabalho em questão consiste em monitorar a memória de um computador com sistema operacional linux e imprimir no terminal
 os processos em ordem decrescente de acordo com o uso da memória no momento. Assim é feito o monitoramente de quanta memória cada
